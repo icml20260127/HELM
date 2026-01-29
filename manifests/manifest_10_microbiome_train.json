@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "graph_id": "C0001",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/C0001/entity_graph.pkl",
+    "T_path": "data/microbiome/C0001/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/C0001/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/C0001/features/edge_features.csv",
+    "score_path": "outputs/microbiome/C0001/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/C0001/positive_edges/positive.pkl"
+  },
+  {
+    "id": 2,
+    "graph_id": "C0005",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/C0005/entity_graph.pkl",
+    "T_path": "data/microbiome/C0005/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/C0005/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/C0005/features/edge_features.csv",
+    "score_path": "outputs/microbiome/C0005/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/C0005/positive_edges/positive.pkl"
+  },
+  {
+    "id": 3,
+    "graph_id": "C0007",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/C0007/entity_graph.pkl",
+    "T_path": "data/microbiome/C0007/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/C0007/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/C0007/features/edge_features.csv",
+    "score_path": "outputs/microbiome/C0007/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/C0007/positive_edges/positive.pkl"
+  },
+  {
+    "id": 4,
+    "graph_id": "C0009",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/C0009/entity_graph.pkl",
+    "T_path": "data/microbiome/C0009/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/C0009/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/C0009/features/edge_features.csv",
+    "score_path": "outputs/microbiome/C0009/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/C0009/positive_edges/positive.pkl"
+  },
+  {
+    "id": 5,
+    "graph_id": "C0015",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/C0015/entity_graph.pkl",
+    "T_path": "data/microbiome/C0015/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/C0015/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/C0015/features/edge_features.csv",
+    "score_path": "outputs/microbiome/C0015/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/C0015/positive_edges/positive.pkl"
+  },
+  {
+    "id": 6,
+    "graph_id": "P0004",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/P0004/entity_graph.pkl",
+    "T_path": "data/microbiome/P0004/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/P0004/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/P0004/features/edge_features.csv",
+    "score_path": "outputs/microbiome/P0004/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/P0004/positive_edges/positive.pkl"
+  },
+  {
+    "id": 7,
+    "graph_id": "P0005",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/P0005/entity_graph.pkl",
+    "T_path": "data/microbiome/P0005/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/P0005/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/P0005/features/edge_features.csv",
+    "score_path": "outputs/microbiome/P0005/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/P0005/positive_edges/positive.pkl"
+  },
+  {
+    "id": 8,
+    "graph_id": "P0008",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/P0008/entity_graph.pkl",
+    "T_path": "data/microbiome/P0008/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/P0008/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/P0008/features/edge_features.csv",
+    "score_path": "outputs/microbiome/P0008/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/P0008/positive_edges/positive.pkl"
+  },
+  {
+    "id": 9,
+    "graph_id": "P0009",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/P0009/entity_graph.pkl",
+    "T_path": "data/microbiome/P0009/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/P0009/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/P0009/features/edge_features.csv",
+    "score_path": "outputs/microbiome/P0009/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/P0009/positive_edges/positive.pkl"
+  },
+  {
+    "id": 10,
+    "graph_id": "P0010",
+    "collection": "microbiome",
+    "G_path": "data/microbiome/P0010/entity_graph.pkl",
+    "T_path": "data/microbiome/P0010/hierarchy_tree.pkl",
+    "node_features_path": "outputs/microbiome/P0010/features/node_features.csv",
+    "edge_features_path": "outputs/microbiome/P0010/features/edge_features.csv",
+    "score_path": "outputs/microbiome/P0010/scores/edge_scores.csv",
+    "positive_edges_path": "outputs/microbiome/P0010/positive_edges/positive.pkl"
+  }
+]

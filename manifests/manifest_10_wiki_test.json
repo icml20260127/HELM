@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "graph_id": "Algorithms",
+    "collection": "wiki",
+    "G_path": "data/wiki/Algorithms/entity_graph.pkl",
+    "T_path": "data/wiki/Algorithms/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/Algorithms/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/Algorithms/features/edge_features.csv",
+    "score_path": "outputs/wiki/Algorithms/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 2,
+    "graph_id": "Artificial intelligence",
+    "collection": "wiki",
+    "G_path": "data/wiki/Artificial intelligence/entity_graph.pkl",
+    "T_path": "data/wiki/Artificial intelligence/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/Artificial intelligence/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/Artificial intelligence/features/edge_features.csv",
+    "score_path": "outputs/wiki/Artificial intelligence/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 3,
+    "graph_id": "Complex numbers",
+    "collection": "wiki",
+    "G_path": "data/wiki/Complex numbers/entity_graph.pkl",
+    "T_path": "data/wiki/Complex numbers/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/Complex numbers/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/Complex numbers/features/edge_features.csv",
+    "score_path": "outputs/wiki/Complex numbers/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 4,
+    "graph_id": "Computer graphics",
+    "collection": "wiki",
+    "G_path": "data/wiki/Computer graphics/entity_graph.pkl",
+    "T_path": "data/wiki/Computer graphics/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/Computer graphics/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/Computer graphics/features/edge_features.csv",
+    "score_path": "outputs/wiki/Computer graphics/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 5,
+    "graph_id": "Control theory",
+    "collection": "wiki",
+    "G_path": "data/wiki/Control theory/entity_graph.pkl",
+    "T_path": "data/wiki/Control theory/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/Control theory/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/Control theory/features/edge_features.csv",
+    "score_path": "outputs/wiki/Control theory/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 6,
+    "graph_id": "Cryptography",
+    "collection": "wiki",
+    "G_path": "data/wiki/Cryptography/entity_graph.pkl",
+    "T_path": "data/wiki/Cryptography/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/Cryptography/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/Cryptography/features/edge_features.csv",
+    "score_path": "outputs/wiki/Cryptography/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 7,
+    "graph_id": "Machine learning",
+    "collection": "wiki",
+    "G_path": "data/wiki/Machine learning/entity_graph.pkl",
+    "T_path": "data/wiki/Machine learning/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/Machine learning/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/Machine learning/features/edge_features.csv",
+    "score_path": "outputs/wiki/Machine learning/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 8,
+    "graph_id": "Economics",
+    "collection": "wiki",
+    "G_path": "data/wiki/Economics/entity_graph.pkl",
+    "T_path": "data/wiki/Economics/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/Economics/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/Economics/features/edge_features.csv",
+    "score_path": "outputs/wiki/Economics/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 9,
+    "graph_id": "Genetics",
+    "collection": "wiki",
+    "G_path": "data/wiki/Genetics/entity_graph.pkl",
+    "T_path": "data/wiki/Genetics/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/Genetics/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/Genetics/features/edge_features.csv",
+    "score_path": "outputs/wiki/Genetics/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 10,
+    "graph_id": "History of science",
+    "collection": "wiki",
+    "G_path": "data/wiki/History of science/entity_graph.pkl",
+    "T_path": "data/wiki/History of science/hierarchy_tree.pkl",
+    "node_features_path": "outputs/wiki/History of science/features/node_features.csv",
+    "edge_features_path": "outputs/wiki/History of science/features/edge_features.csv",
+    "score_path": "outputs/wiki/History of science/scores/edge_scores.csv",
+    "positive_edges_path": null
+  }
+]

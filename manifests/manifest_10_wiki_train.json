@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "graph_id": "Graph theory",
+        "collection": "wiki",
+        "G_path": "data/wiki/Graph theory/entity_graph.pkl",
+        "T_path": "data/wiki/Graph theory/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Graph theory/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Graph theory/features/edge_features.csv",
+        "score_path": "outputs/wiki/Graph theory/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Graph theory/positive_edges/positive.pkl"
+    },
+    {
+        "id": 2,
+        "graph_id": "Linear algebra",
+        "collection": "wiki",
+        "G_path": "data/wiki/Linear algebra/entity_graph.pkl",
+        "T_path": "data/wiki/Linear algebra/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Linear algebra/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Linear algebra/features/edge_features.csv",
+        "score_path": "outputs/wiki/Linear algebra/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Linear algebra/positive_edges/positive.pkl"
+    },
+    {
+        "id": 3,
+        "graph_id": "Calculus",
+        "collection": "wiki",
+        "G_path": "data/wiki/Calculus/entity_graph.pkl",
+        "T_path": "data/wiki/Calculus/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Calculus/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Calculus/features/edge_features.csv",
+        "score_path": "outputs/wiki/Calculus/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Calculus/positive_edges/positive.pkl"
+    },
+    {
+        "id": 4,
+        "graph_id": "Topology",
+        "collection": "wiki",
+        "G_path": "data/wiki/Topology/entity_graph.pkl",
+        "T_path": "data/wiki/Topology/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Topology/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Topology/features/edge_features.csv",
+        "score_path": "outputs/wiki/Topology/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Topology/positive_edges/positive.pkl"
+    },
+    {
+        "id": 5,
+        "graph_id": "Electronics",
+        "collection": "wiki",
+        "G_path": "data/wiki/Electronics/entity_graph.pkl",
+        "T_path": "data/wiki/Electronics/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Electronics/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Electronics/features/edge_features.csv",
+        "score_path": "outputs/wiki/Electronics/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Electronics/positive_edges/positive.pkl"
+    },
+    {
+        "id": 6,
+        "graph_id": "Neuroscience",
+        "collection": "wiki",
+        "G_path": "data/wiki/Neuroscience/entity_graph.pkl",
+        "T_path": "data/wiki/Neuroscience/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Neuroscience/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Neuroscience/features/edge_features.csv",
+        "score_path": "outputs/wiki/Neuroscience/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Neuroscience/positive_edges/positive.pkl"
+    },
+    {
+        "id": 7,
+        "graph_id": "Biochemistry",
+        "collection": "wiki",
+        "G_path": "data/wiki/Biochemistry/entity_graph.pkl",
+        "T_path": "data/wiki/Biochemistry/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Biochemistry/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Biochemistry/features/edge_features.csv",
+        "score_path": "outputs/wiki/Biochemistry/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Biochemistry/positive_edges/positive.pkl"
+    },
+    {
+        "id": 8,
+        "graph_id": "Philosophy",
+        "collection": "wiki",
+        "G_path": "data/wiki/Philosophy/entity_graph.pkl",
+        "T_path": "data/wiki/Philosophy/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Philosophy/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Philosophy/features/edge_features.csv",
+        "score_path": "outputs/wiki/Philosophy/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Philosophy/positive_edges/positive.pkl"
+    },
+    {
+        "id": 9,
+        "graph_id": "Robotics",
+        "collection": "wiki",
+        "G_path": "data/wiki/Robotics/entity_graph.pkl",
+        "T_path": "data/wiki/Robotics/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Robotics/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Robotics/features/edge_features.csv",
+        "score_path": "outputs/wiki/Robotics/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Robotics/positive_edges/positive.pkl"
+    },
+    {
+        "id": 10,
+        "graph_id": "Probability theory",
+        "collection": "wiki",
+        "G_path": "data/wiki/Probability theory/entity_graph.pkl",
+        "T_path": "data/wiki/Probability theory/hierarchy_tree.pkl",
+        "node_features_path": "outputs/wiki/Probability theory/features/node_features.csv",
+        "edge_features_path": "outputs/wiki/Probability theory/features/edge_features.csv",
+        "score_path": "outputs/wiki/Probability theory/scores/edge_scores.csv",
+        "positive_edges_path": "outputs/wiki/Probability theory/positive_edges/positive.pkl"
+    }
+]

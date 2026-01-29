@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "graph_id": "cascade_00164",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_00164/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_00164/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_00164/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_00164/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_00164/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 2,
+    "graph_id": "cascade_00731",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_00731/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_00731/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_00731/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_00731/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_00731/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 3,
+    "graph_id": "cascade_00175",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_00175/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_00175/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_00175/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_00175/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_00175/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 4,
+    "graph_id": "cascade_01383",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_01383/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_01383/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_01383/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_01383/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_01383/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 5,
+    "graph_id": "cascade_00615",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_00615/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_00615/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_00615/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_00615/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_00615/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 6,
+    "graph_id": "cascade_01881",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_01881/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_01881/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_01881/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_01881/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_01881/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 7,
+    "graph_id": "cascade_01687",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_01687/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_01687/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_01687/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_01687/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_01687/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 8,
+    "graph_id": "cascade_02387",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_02387/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_02387/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_02387/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_02387/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_02387/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 9,
+    "graph_id": "cascade_00494",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_00494/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_00494/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_00494/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_00494/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_00494/scores/edge_scores.csv",
+    "positive_edges_path": null
+  },
+  {
+    "id": 10,
+    "graph_id": "cascade_02305",
+    "collection": "memetracker",
+    "G_path": "data/memetracker/cascades/cascade_02305/entity_graph.pkl",
+    "T_path": "data/memetracker/cascades/cascade_02305/hierarchy_tree.pkl",
+    "node_features_path": "outputs/memetracker/cascade_02305/features/node_features.csv",
+    "edge_features_path": "outputs/memetracker/cascade_02305/features/edge_features.csv",
+    "score_path": "outputs/memetracker/cascade_02305/scores/edge_scores.csv",
+    "positive_edges_path": null
+  }
+]
