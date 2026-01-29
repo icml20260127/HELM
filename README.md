@@ -18,14 +18,14 @@ HELM/
 │   ├── sa_wiki.json                  # Simulated annealing params for Wikipedia
 │   ├── sa_microbiome.json            # Simulated annealing params for Microbiome
 │   └── sa_memetracker.json           # Simulated annealing params for MemeTracker
-├── src/                               # Core Python modules (6 modules, 2000+ lines)
+├── src/                               # Core Python modules (6 modules)
 │   ├── __init__.py
 │   ├── utils.py                       # Utilities: graph I/O, metrics, logging
 │   ├── algorithms/                    # Core algorithms
-│   │   ├── edge_features.py          # Feature extraction (40+ graph measures)
+│   │   ├── edge_features.py          # Feature extraction
 │   │   ├── edge_scores.py            # XGBoost/LightGBM edge scoring
-│   │   ├── edge_scores_gnn.py        # GNN-based edge scoring (GINEConv)
-│   │   ├── optimal_root.py           # Optimal root finding (235x faster)
+│   │   ├── edge_scores_gnn.py        # GNN-based edge scoring
+│   │   ├── optimal_root.py           # Optimal root finding
 │   │   └── tree_search.py            # Simulated annealing tree search
 │   ├── data_extractors/               # Data extraction from external sources
 │   │   ├── memetracker_extractor.py  # MemeTracker data processing
@@ -51,7 +51,7 @@ HELM/
 
 **Core (required):**
 ```bash
-pip install networkx numpy pandas scikit-learn xgboost lightgbm
+pip install networkx numpy pandas scikit-learn xgboost lightgbm optuna optuna-integration[xgboost,lightgbm,pytorch-lightning]
 pip install graphMeasures
 pip install --upgrade networkx  # Important: upgrade after graphMeasures
 ```
@@ -126,7 +126,7 @@ python -m src.algorithms.tree_search \
 
 **Key parameters:**
 - `--max-iter`: Number of iterations (default: 5M, use 0 for MST-only initialization)
-- `--init-method`: Tree initialization (`mst`, `random`, `greedy`)
+- `--init-method`: Tree initialization (`mst`, `positive_edges`, `empty`)
 
 **Output:** `outputs/{collection}/{graph_id}/search/tree.pkl`
 
@@ -149,9 +149,9 @@ python -m src.algorithms.optimal_root \
 
 ```bash
 # Full pipeline for Wikipedia test set
-cd core_components
+cd HELM
 
-# 1. Features (already computed in sample data, but shown for completeness)
+# 1. Features
 python -m src.algorithms.edge_features \
   --manifest manifests/manifest_10_wiki_test.json \
   --collection wiki \
@@ -166,7 +166,7 @@ python -m src.algorithms.edge_scores \
   --score-only \
   --model-path outputs/wiki/model
 
-# 3. Reconstruct trees (5M iterations with tested hyperparameters)
+# 3. Reconstruct trees
 python -m src.algorithms.tree_search \
   --manifest manifests/manifest_10_wiki_test.json \
   --collection wiki \
@@ -214,23 +214,9 @@ This uses MST with learned edge scores as initialization without further optimiz
 
 Tested hyperparameters for each dataset in `configs/xgb_{collection}.json`:
 
-| Dataset | Learning Rate | Max Depth | N Estimators | Scale Pos Weight |
-|---------|--------------|-----------|--------------|------------------|
-| Wikipedia | 0.063 | 4 | 325 | 4.0 |
-| Microbiome | 0.118 | 4 | 382 | 4.0 |
-| MemeTracker | 0.113 | 4 | 54 | 4.0 |
-
 ### Tree Search (Simulated Annealing)
 
 Tested hyperparameters for each dataset in `configs/sa_{collection}.json`:
-
-| Dataset | Initial Temp | Cooling Rate | Stagnation | Loss Weights (C/D/Deg/S/Sc) |
-|---------|-------------|--------------|------------|------------------------------|
-| Wikipedia | 0.318 | 0.9999 | 35k | 2.5/2.4/4.8/2.0/5.0 |
-| Microbiome | 0.264 | 0.9999 | 50k | 1.8/2.4/6.8/5.3/5.1 |
-| MemeTracker | 0.202 | 0.9999 | 40k | 3.0/2.8/4.7/1.9/1.0 |
-
-**Loss components:** Community (C), Diversity (D), Degree (Deg), Shortcut (S), Score (Sc)
 
 ---
 
@@ -321,7 +307,7 @@ python -m src.algorithms.optimal_root \
 
 ### `src/algorithms/edge_features.py`
 
-Extracts 40+ structural features from graphs:
+Extracts structural features from graphs:
 
 - Node features (centrality, clustering, k-core, Fiedler vector, etc.)
 - Edge features (betweenness, connectivity, shortest path)
@@ -406,21 +392,10 @@ python -m src.scripts.optuna_tree_search \
 Simulated Annealing for hierarchy reconstruction:
 
 **Features:**
-
-- 5 loss components: community, diversity, degree, shortcut, edge score
+- Initial tree from MST based on scores or union find tree based on set of known edges
 - 3 move types: NNI, SPR, TBR
 - Adaptive boldness (TBR/SPR ratio increases during stagnation)
 - Early stopping (2-tier: stagnation + bold stagnation)
-- Optimized adjacency dict (235x faster than NetworkX)
-
-**Loss functions:**
-
-- **Community:** Penalizes edges between different communities (Leiden)
-- **Diversity:** Maximizes neighbor diversity within communities
-- **Degree:** MSE between predicted and target degree distribution
-- **Shortcut:** Penalizes edges not in original graph
-- **Score:** Minimizes edge scores (prefers high-confidence edges)
-
 **Configuration:** 12 hyperparameters (optimizable via Optuna)
 
 **Usage:**
@@ -446,9 +421,8 @@ python -m src.algorithms.tree_search \
 
 Optimal root selection for tree directionality:
 
-**Algorithm:** BFS-based, tests all candidate roots (O(n²) with optimizations)  
-**Criterion:** Minimizes MSE between predicted and ground-truth depth distributions  
-**Speedup:** 235x faster than NetworkX via adjacency dict  
+**Algorithm:** BFS-based, tests all candidate roots  
+**Criterion:** Minimizes MSE between predicted and ground-truth depth distributions   
 
 **Outputs per graph:**
 
@@ -481,7 +455,7 @@ Utility functions:
 | `compute_tree_metrics(true_tree, pred_tree)` | Compute TPR, FPR, F1, etc. |
 | `compute_confusion_from_trees(...)` | Get TP/FP/FN/TN counts |
 | `setup_logger(out_dir, level)` | Configure logging |
-| `Pool`, `UnionFind` | Efficient data structures |
+| `Pool`, `UnionFind` | Data structures |
 
 ## Data Format Reference
 
@@ -502,63 +476,3 @@ Utility functions:
 ]
 ```
 
-### Graph File Formats
-
-- **`.pkl` files:** NetworkX Graph objects (pickle format)
-  - Can load with: `G = pickle.load(open("graph.pkl", "rb"))`
-  - Or use: `from src.utils import load_graph`
-
-- **`.csv` files:** Features or scores in tabular format
-  - Features: rows=nodes/edges, columns=feature_values
-  - Scores: columns=[source, target, score]
-
-## Datasets Overview
-
-| Dataset | # Graphs | # Nodes (avg) | # Edges (avg) | Type |
-|---------|----------|--------------|---------------|------|
-| **Wiki** | 20 | ~500 | ~1000 | Category hierarchies |
-| **Microbiome** | 20 | ~300 | ~600 | Taxonomic trees |
-| **MemeTracker** | 20 | ~150 | ~400 | Cascade trees |
-
-### Graph Statistics
-
-```python
-import json
-from src.utils import load_graph
-
-with open("manifests/manifest_10_wiki_test.json") as f:
-    manifest = json.load(f)
-
-for entry in manifest[:3]:
-    G = load_graph(entry["G_path"])
-    T = load_graph(entry["T_path"])
-    print(f"{entry['graph_id']:20} | G: {G.number_of_nodes():4} nodes | T: {T.number_of_edges():4} edges")
-```
-
-## Performance & Scaling
-
-| Operation | Time (10 graphs) | Parallelization |
-|-----------|-----------------|-----------------|
-| Feature extraction | ~2 min | 4 workers (ProcessPoolExecutor) |
-| Model training (XGB) | ~1 min | Single process + Optuna |
-| Hyperparameter search (50 trials) | ~15 min | 4 workers × 25 trials each |
-| Tree search (per graph) | ~10-60s | Parallelizable across graphs |
-| Optimal root selection | ~0.5s | Very fast (BFS-based) |
-
-## Troubleshooting
-
-**Issue:** `FileNotFoundError: data/wiki/...`
-
-- **Solution:** Ensure manifest paths are relative to where you run the scripts
-
-**Issue:** Out of memory during feature extraction
-
-- **Solution:** Reduce `--workers` (default 4) or use `--feature-workers 1`
-
-**Issue:** Slow tree search
-
-- **Solution:** Reduce `--max-iter` (default 5M) or increase `--workers` for parallelization
-
-**Issue:** GPU not detected
-
-- **Solution:** Check `CUDA_VISIBLE_DEVICES` or use `--gpu_id -1` for CPU-only mode
