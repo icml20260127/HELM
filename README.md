@@ -46,73 +46,20 @@ core_components/
 
 ## Dependencies
 
-### Core Dependencies (Required)
-
-These are required for all core algorithms:
-
+**Core (required):**
 ```bash
-pip install networkx numpy pandas scikit-learn
-```
-
-| Package | Version | Used By | Purpose |
-|---------|---------|---------|----------|
-| `networkx` | ≥2.6 | All modules | Graph data structures and algorithms |
-| `numpy` | ≥1.19 | All modules | Numerical computations |
-| `pandas` | ≥1.1 | edge_scores, utils | Tabular data and metrics |
-| `scikit-learn` | ≥0.24 | edge_features, tree_search | Feature scaling, metrics |
-
-### Tree Search & Feature Extraction
-
-Required for edge scoring and hierarchy reconstruction:
-
-```bash
-pip install xgboost lightgbm optuna
+pip install networkx numpy pandas scikit-learn xgboost lightgbm optuna
 pip install graphMeasures
-pip install --upgrade networkx
+pip install --upgrade networkx  # Important: upgrade after graphMeasures
 ```
 
-**⚠️ Important:** After installing `graphMeasures`, you **must** upgrade `networkx` to ensure compatibility.
-
-| Package | Version | Module | Purpose |
-|---------|---------|--------|----------|
-| `xgboost` | ≥1.4 | edge_scores | XGBoost classifier for edge predictions |
-| `lightgbm` | ≥3.1 | edge_scores | LightGBM classifier alternative to XGBoost |
-| `optuna` | ≥2.8 | optuna_tree_search, edge_scores | Hyperparameter optimization |
-| `graphMeasures` | latest | edge_features | 40+ structural graph features (centrality, clustering, etc.) |
-
-### Graph Neural Networks (Optional)
-
-Only required if using GNN-based edge scoring (`edge_scores_gnn.py`):
-
+**GNN support (optional):**
 ```bash
 pip install torch pytorch-lightning torch-geometric
 ```
 
-| Package | Version | Module | Purpose |
-|---------|---------|--------|----------|
-| `torch` | ≥1.10 | edge_scores_gnn | PyTorch deep learning framework |
-| `pytorch-lightning` | ≥1.5 | edge_scores_gnn | Lightning training abstraction |
-| `torch-geometric` | ≥2.0 | edge_scores_gnn | Graph neural network layers (GINEConv) |
-
-### Wikipedia Extraction (Optional)
-
-Only required if extracting new Wikipedia data (`wiki_extractor.py`):
-
+**Wikipedia extraction (optional):**
 ```bash
-pip install wikipediaapi
-```
-
-| Package | Version | Module | Purpose |
-|---------|---------|--------|----------|
-| `wikipediaapi` | ≥0.5 | wiki_extractor | Wikipedia API access with rate limiting |
-
-### Full Installation (All Features)
-
-```bash
-# Core + tree search + GNN + Wikipedia
-pip install networkx numpy pandas scikit-learn xgboost lightgbm optuna graphMeasures
-pip install --upgrade networkx
-pip install torch pytorch-lightning torch-geometric
 pip install wikipediaapi
 ```
 
