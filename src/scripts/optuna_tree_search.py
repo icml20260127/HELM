@@ -486,9 +486,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--init-method",
         type=str,
-        choices=["positive_edges", "mst_log1ms", "empty"],
+        choices=["positive_edges", "mst", "empty"],
         default="positive_edges",
-        help="Initial tree construction method: positive_edges (default), mst_log1ms (MST with log(1-score) weights), empty (arbitrary union find tree)",
+        help="Initial tree construction method: positive_edges (default), mst (MST with log(1-score) weights), empty (arbitrary union find tree)",
     )
     parser.add_argument(
         "--skip-score-loading",
