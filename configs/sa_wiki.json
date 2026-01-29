@@ -1,0 +1,20 @@
+{
+    "initial_temp": 0.31836604989664075,
+    "cooling_rate": 0.9999041607310027,
+    "max_iter": 100000000,
+    "loss_weights": {
+        "community": 2.485198852774305,
+        "diversity": 2.4184655797768237,
+        "degree": 4.803247912123328,
+        "shortcut": 1.9814046201499087,
+        "score": 4.999681963765728
+    },
+    "resolution": 0.12466809353674525,
+    "stagnation_threshold": 35000,
+    "bold_stagnation_threshold": 45000,
+    "leiden_n_iterations": 2,
+    "min_bold_prob": 0.18829950979088872,
+    "bold_prob_scale": 0.208103495032827,
+    "bold_multiplier": 4.796859739743831,
+    "seed": 42
+}
