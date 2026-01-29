@@ -149,57 +149,6 @@ This will search for optimal hyperparameters and save results to `outputs/{colle
 
 ---
 
-## Advanced Usage
-
-### Inspecting Data Programmatically
-
-```python
-import json
-from src.utils import load_graph
-
-# Load manifest
-with open("manifests/manifest_10_wiki_test.json") as f:
-    manifest = json.load(f)
-
-# Get first graph
-entry = manifest[0]
-G = load_graph(entry["G_path"])
-T = load_graph(entry["T_path"])
-
-print(f"{entry['graph_id']}: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
-print(f"True hierarchy: {T.number_of_edges()} edges")
-```
-
-### Single Graph Processing
-
-For processing individual graphs without manifests:
-
-```bash
-# Features
-python -m src.algorithms.edge_features \
-  --gid "Algorithms" \
-  --collection wiki \
-  --output-base .
-
-# Tree search with config
-python -m src.algorithms.tree_search \
-  --gid "Algorithms" \
-  --graph data/wiki/Algorithms/entity_graph.pkl \
-  --tree data/wiki/Algorithms/hierarchy_tree.pkl \
-  --collection wiki \
-  --config configs/sa_wiki.json \
-  --output-dir .
-
-# Optimal root
-python -m src.algorithms.optimal_root \
-  --gid "Algorithms" \
-  --collection wiki \
-  --output-dir . \
-  --mode eval
-```
-
----
-
 ## Core Modules
 
 ### `src/algorithms/edge_features.py`
@@ -210,7 +159,7 @@ Extracts structural features from graphs:
 - Edge features (betweenness, connectivity, shortest path)
 - Combined node-pair features (avg and diff vectors)
 
-**Parallelization:** ProcessPoolExecutor for 4x speedup
+**Parallelization:** ProcessPoolExecutor for speedup
 
 **Usage:**
 
