@@ -1,19 +1,16 @@
-# Hierarchy Core Components
+# HELM: Hierarchy via Edge Learning and MST
 
-Core algorithms for **hierarchy prediction from knowledge graphs** using machine learning and optimization.
+**Supplementary Code and Data**
 
-This package provides end-to-end solutions for:
+This package contains the source code and sample data for:
 
-- **Feature engineering** from graph structures
-- **Edge scoring** with XGBoost/LightGBM or Graph Neural Networks
-- **Hierarchy reconstruction** using Simulated Annealing
-- **Root selection** for optimal tree directionality
-- **Hyperparameter optimization** with Optuna
+> **HELM: Hierarchy via Edge Learning and MST**  
+
 
 ## Directory Structure
 
 ```
-core_components/
+HELM/
 ├── README.md                          # This file
 ├── src/                               # Core Python modules (6 modules, 2000+ lines)
 │   ├── __init__.py
