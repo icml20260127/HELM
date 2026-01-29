@@ -6,12 +6,18 @@ This package contains the source code and sample data for:
 
 > **HELM: Hierarchy via Edge Learning and MST**  
 
-
 ## Directory Structure
 
 ```
 HELM/
 ├── README.md                          # This file
+├── configs/                           # Tested hyperparameters for each dataset
+│   ├── xgb_wiki.json                 # XGBoost params for Wikipedia
+│   ├── xgb_microbiome.json           # XGBoost params for Microbiome
+│   ├── xgb_memetracker.json          # XGBoost params for MemeTracker
+│   ├── sa_wiki.json                  # Simulated annealing params for Wikipedia
+│   ├── sa_microbiome.json            # Simulated annealing params for Microbiome
+│   └── sa_memetracker.json           # Simulated annealing params for MemeTracker
 ├── src/                               # Core Python modules (6 modules, 2000+ lines)
 │   ├── __init__.py
 │   ├── utils.py                       # Utilities: graph I/O, metrics, logging
@@ -25,7 +31,7 @@ HELM/
 │   │   ├── memetracker_extractor.py  # MemeTracker data processing
 │   │   └── wiki_extractor.py         # Wikipedia category extraction
 │   └── scripts/
-│       └── optuna_tree_search.py     # Hyperparameter tuning framework
+│       └── optuna_tree_search.py     # Hyperparameter tuning framework (optional)
 ├── data/                              # Sample graphs (60 graph pairs, 3 datasets)
 │   ├── wiki/                          # Wikipedia categories (20 graphs)
 │   │   ├── Algorithms/, AI/, ML/, ... 
@@ -45,7 +51,7 @@ HELM/
 
 **Core (required):**
 ```bash
-pip install networkx numpy pandas scikit-learn xgboost lightgbm optuna
+pip install networkx numpy pandas scikit-learn xgboost lightgbm
 pip install graphMeasures
 pip install --upgrade networkx  # Important: upgrade after graphMeasures
 ```
@@ -60,174 +66,262 @@ pip install torch pytorch-lightning torch-geometric
 pip install wikipediaapi
 ```
 
-## Quick Start (5 Minutes)
-
-### 1. Load and Explore Data
-
-```python
-import json
-from src.utils import load_graph
-
-# Load manifest (maps graph IDs to file paths)
-with open("manifests/manifest_10_wiki_test.json") as f:
-    manifest = json.load(f)
-
-# Get first graph
-entry = manifest[0]
-print(f"Graph ID: {entry['graph_id']}")
-
-# Load entity graph (G) and ground-truth hierarchy (T)
-G = load_graph(entry["G_path"])   # Full knowledge graph
-T = load_graph(entry["T_path"])   # Target hierarchy (subset of G)
-
-print(f"Entity graph G: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
-print(f"Hierarchy T: {T.number_of_nodes()} nodes, {T.number_of_edges()} edges")
+**Optuna for hyperparameter tuning (optional):**
+```bash
+pip install optuna
 ```
 
-### 2. Quick Feature Extraction
+## HELM Pipeline (Complete Workflow)
+
+The HELM algorithm follows a 4-step pipeline. Tested hyperparameters are provided in `configs/` for each dataset.
+
+### Step 1: Extract Topological Features
 
 ```bash
-# Compute features for a single graph
-python -m src.algorithms.edge_features \
-  --gid "Algorithms" \
-  --collection wiki \
-  --output-base .
-```
-
-Outputs:
-
-- `outputs/wiki/Algorithms/features/node_features.csv`
-- `outputs/wiki/Algorithms/features/edge_features.csv`
-
-### 3. Train Edge Scoring Model
-
-```bash
-# Train XGBoost model on 10 graphs (multi-graph training)
-python -m src.algorithms.edge_scores \
-  --manifest manifests/manifest_10_wiki_train.json \
-  --collection wiki \
-  --output-dir . \
-  --model xgb \
-  --n-trials 20
-```
-
-Outputs:
-
-- `outputs/wiki/model/best_model.pkl` (trained classifier)
-- `outputs/wiki/model/best_params.json` (optimal hyperparameters)
-- Per-graph: `outputs/wiki/*/scores/edge_scores.csv` (edge predictions)
-
-### 4. Hierarchy Reconstruction (Simulated Annealing)
-
-```bash
-# Run tree search on a single graph
-python -m src.algorithms.tree_search \
-  --gid "Algorithms" \
-  --graph data/wiki/Algorithms/entity_graph.pkl \
-  --tree data/wiki/Algorithms/hierarchy_tree.pkl \
-  --collection wiki \
-  --output-dir .
-```
-
-Outputs:
-
-- `outputs/wiki/Algorithms/search/tree.pkl` (reconstructed tree)
-- `outputs/wiki/Algorithms/search/metrics.json` (evaluation metrics)
-
-### 5. Find Optimal Root and Evaluate
-
-```bash
-# Automatically select best root and direct tree to arborescence
-python -m src.algorithms.optimal_root \
-  --gid "Algorithms" \
-  --collection wiki \
-  --output-dir . \
-  --mode train
-```
-
-Outputs:
-
-- `outputs/wiki/Algorithms/search/optimal_root/tree_directed.pkl` (rooted tree)
-- `outputs/wiki/Algorithms/search/optimal_root/optimal_root.json` (root info)
-
-## Full Workflow Pipeline
-
-For end-to-end hierarchy prediction:
-
-```bash
-# Step 1: Feature extraction (10 graphs)
+# Extract features for all graphs in manifest
 python -m src.algorithms.edge_features \
   --manifest manifests/manifest_10_wiki_train.json \
   --collection wiki \
   --output-base . \
   --workers 4
+```
 
-# Step 2: Train scoring model (multi-graph, 10 graphs)
+**Output:** `outputs/{collection}/{graph_id}/features/node_features.csv` and `edge_features.csv`
+
+### Step 2: Train Edge Scoring Model
+
+```bash
+# Train XGBoost model with tested hyperparameters
+python -m src.algorithms.edge_scores \
+  --manifest manifests/manifest_10_wiki_train.json \
+  --collection wiki \
+  --output-dir . \
+  --model xgb \
+  --xgb-params configs/xgb_wiki.json
+```
+
+**Tested configs available:**
+- `configs/xgb_wiki.json` (Wikipedia)
+- `configs/xgb_microbiome.json` (Microbiome)  
+- `configs/xgb_memetracker.json` (MemeTracker)
+
+**Output:** `outputs/{collection}/model/best_model.pkl` and edge scores per graph
+
+### Step 3: Hierarchy Reconstruction (Tree Search)
+
+```bash
+# Run tree search with tested hyperparameters
+python -m src.algorithms.tree_search \
+  --manifest manifests/manifest_10_wiki_test.json \
+  --collection wiki \
+  --output-dir . \
+  --config configs/sa_wiki.json \
+  --max-iter 5000000
+```
+
+**Tested configs available:**
+- `configs/sa_wiki.json` (Wikipedia)
+- `configs/sa_microbiome.json` (Microbiome)
+- `configs/sa_memetracker.json` (MemeTracker)
+
+**Key parameters:**
+- `--max-iter`: Number of iterations (default: 5M, use 0 for MST-only initialization)
+- `--init-method`: Tree initialization (`mst`, `random`, `greedy`)
+
+**Output:** `outputs/{collection}/{graph_id}/search/tree.pkl`
+
+### Step 4: Root Selection and Directionality
+
+```bash
+# Find optimal root using depth distribution matching
+python -m src.algorithms.optimal_root \
+  --manifest manifests/manifest_10_wiki_test.json \
+  --collection wiki \
+  --output-dir . \
+  --mode eval
+```
+
+**Output:** `outputs/{collection}/{graph_id}/search/optimal_root/tree_directed.pkl`
+
+---
+
+## Complete Example (Wikipedia)
+
+```bash
+# Full pipeline for Wikipedia test set
+cd core_components
+
+# 1. Features (already computed in sample data, but shown for completeness)
+python -m src.algorithms.edge_features \
+  --manifest manifests/manifest_10_wiki_test.json \
+  --collection wiki \
+  --output-base . \
+  --workers 4
+
+# 2. Score edges using pre-trained model and tested hyperparameters
+python -m src.algorithms.edge_scores \
+  --manifest manifests/manifest_10_wiki_test.json \
+  --collection wiki \
+  --output-dir . \
+  --score-only \
+  --model-path outputs/wiki/model
+
+# 3. Reconstruct trees (5M iterations with tested hyperparameters)
+python -m src.algorithms.tree_search \
+  --manifest manifests/manifest_10_wiki_test.json \
+  --collection wiki \
+  --output-dir . \
+  --config configs/sa_wiki.json \
+  --max-iter 5000000
+
+# 4. Find optimal roots
+python -m src.algorithms.optimal_root \
+  --manifest manifests/manifest_10_wiki_test.json \
+  --collection wiki \
+  --output-dir . \
+  --mode eval
+```
+
+---
+
+## Quick Test (MST-only, no optimization)
+
+For fast testing without simulated annealing:
+
+```bash
+# Use MST initialization only (--max-iter 0)
+python -m src.algorithms.tree_search \
+  --manifest manifests/manifest_10_wiki_test.json \
+  --collection wiki \
+  --output-dir . \
+  --config configs/sa_wiki.json \
+  --max-iter 0
+
+python -m src.algorithms.optimal_root \
+  --manifest manifests/manifest_10_wiki_test.json \
+  --collection wiki \
+  --output-dir . \
+  --mode eval
+```
+
+This uses MST with learned edge scores as initialization without further optimization.
+
+---
+
+## Configuration Files
+
+### Edge Scoring (XGBoost)
+
+Tested hyperparameters for each dataset in `configs/xgb_{collection}.json`:
+
+| Dataset | Learning Rate | Max Depth | N Estimators | Scale Pos Weight |
+|---------|--------------|-----------|--------------|------------------|
+| Wikipedia | 0.063 | 4 | 325 | 4.0 |
+| Microbiome | 0.118 | 4 | 382 | 4.0 |
+| MemeTracker | 0.113 | 4 | 54 | 4.0 |
+
+### Tree Search (Simulated Annealing)
+
+Tested hyperparameters for each dataset in `configs/sa_{collection}.json`:
+
+| Dataset | Initial Temp | Cooling Rate | Stagnation | Loss Weights (C/D/Deg/S/Sc) |
+|---------|-------------|--------------|------------|------------------------------|
+| Wikipedia | 0.318 | 0.9999 | 35k | 2.5/2.4/4.8/2.0/5.0 |
+| Microbiome | 0.264 | 0.9999 | 50k | 1.8/2.4/6.8/5.3/5.1 |
+| MemeTracker | 0.202 | 0.9999 | 40k | 3.0/2.8/4.7/1.9/1.0 |
+
+**Loss components:** Community (C), Diversity (D), Degree (Deg), Shortcut (S), Score (Sc)
+
+---
+
+## Optional: Hyperparameter Tuning with Optuna
+
+If you want to discover new hyperparameters for your own datasets:
+
+### Tune Edge Scoring Model
+
+```bash
+pip install optuna  # If not already installed
+
 python -m src.algorithms.edge_scores \
   --manifest manifests/manifest_10_wiki_train.json \
   --collection wiki \
   --output-dir . \
   --model xgb \
   --n-trials 50
+```
 
-# Step 3: Hyperparameter tuning for tree search
+### Tune Tree Search Parameters
+
+```bash
 python -m src.scripts.optuna_tree_search \
   --manifest manifests/manifest_10_wiki_train.json \
   --collection wiki \
   --output-dir . \
   --n-workers 4 \
-  --trials-per-worker 25 \
-  --graph-workers 10
+  --trials-per-worker 25
+```
 
-# Step 4: Reconstruct trees on test set (using tuned hyperparameters)
-python -m src.algorithms.tree_search \
-  --manifest manifests/manifest_10_wiki_test.json \
+This will search for optimal hyperparameters and save results to `outputs/{collection}/optuna/`.
+
+---
+
+## Advanced Usage
+
+### Inspecting Data Programmatically
+
+```python
+import json
+from src.utils import load_graph
+
+# Load manifest
+with open("manifests/manifest_10_wiki_test.json") as f:
+    manifest = json.load(f)
+
+# Get first graph
+entry = manifest[0]
+G = load_graph(entry["G_path"])
+T = load_graph(entry["T_path"])
+
+print(f"{entry['graph_id']}: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
+print(f"True hierarchy: {T.number_of_edges()} edges")
+```
+
+### Single Graph Processing
+
+For processing individual graphs without manifests:
+
+```bash
+# Features
+python -m src.algorithms.edge_features \
+  --gid "Algorithms" \
   --collection wiki \
-  --output-dir . \
-  --config outputs/wiki/optuna/best_hyperparameters.json
+  --output-base .
 
-# Step 5: Find optimal roots
+# Tree search with config
+python -m src.algorithms.tree_search \
+  --gid "Algorithms" \
+  --graph data/wiki/Algorithms/entity_graph.pkl \
+  --tree data/wiki/Algorithms/hierarchy_tree.pkl \
+  --collection wiki \
+  --config configs/sa_wiki.json \
+  --output-dir .
+
+# Optimal root
 python -m src.algorithms.optimal_root \
-  --manifest manifests/manifest_10_wiki_test.json \
+  --gid "Algorithms" \
   --collection wiki \
   --output-dir . \
   --mode eval
-
-# Step 6: Evaluate results
-python -c "
-import json
-import pandas as pd
-from src.utils import load_graph, compute_tree_metrics
-
-with open('manifests/manifest_10_wiki_test.json') as f:
-    manifest = json.load(f)
-
-metrics = []
-for entry in manifest:
-    gid = entry['graph_id']
-    coll = entry['collection']
-    
-    # Load predicted and ground-truth trees
-    S = load_graph(f'outputs/{coll}/{gid}/search/optimal_root/tree_directed.pkl')
-    T = load_graph(entry['T_path'])
-    
-    m = compute_tree_metrics(T, S)
-    m['graph_id'] = gid
-    metrics.append(m)
-
-df = pd.DataFrame(metrics)
-print(df[['graph_id', 'tpr', 'precision', 'recall', 'f1']])
-print(f'Mean TPR: {df[\"tpr\"].mean():.4f}')
-"
 ```
+
+---
 
 ## Core Modules
 
 ### `src/algorithms/edge_features.py`
 
 Extracts 40+ structural features from graphs:
-
-**Features computed:**
 
 - Node features (centrality, clustering, k-core, Fiedler vector, etc.)
 - Edge features (betweenness, connectivity, shortest path)
