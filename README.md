@@ -6,46 +6,6 @@ This package contains the source code and sample data for:
 
 > **HELM: Hierarchy via Edge Learning and MST**  
 
-## Directory Structure
-
-```
-HELM/
-├── README.md                          # This file
-├── configs/                           # Tested hyperparameters for each dataset
-│   ├── xgb_wiki.json                 # XGBoost params for Wikipedia
-│   ├── xgb_microbiome.json           # XGBoost params for Microbiome
-│   ├── xgb_memetracker.json          # XGBoost params for MemeTracker
-│   ├── sa_wiki.json                  # Simulated annealing params for Wikipedia
-│   ├── sa_microbiome.json            # Simulated annealing params for Microbiome
-│   └── sa_memetracker.json           # Simulated annealing params for MemeTracker
-├── src/                               # Core Python modules (6 modules)
-│   ├── __init__.py
-│   ├── utils.py                       # Utilities: graph I/O, metrics, logging
-│   ├── algorithms/                    # Core algorithms
-│   │   ├── edge_features.py          # Feature extraction
-│   │   ├── edge_scores.py            # XGBoost/LightGBM edge scoring
-│   │   ├── edge_scores_gnn.py        # GNN-based edge scoring
-│   │   ├── optimal_root.py           # Optimal root finding
-│   │   └── tree_search.py            # Simulated annealing tree search
-│   ├── data_extractors/               # Data extraction from external sources
-│   │   ├── memetracker_extractor.py  # MemeTracker data processing
-│   │   └── wiki_extractor.py         # Wikipedia category extraction
-│   └── scripts/
-│       └── optuna_tree_search.py     # Hyperparameter tuning framework (optional)
-├── data/                              # Sample graphs (60 graph pairs, 3 datasets)
-│   ├── wiki/                          # Wikipedia categories (20 graphs)
-│   │   ├── Algorithms/, AI/, ML/, ... 
-│   │   └── Each: entity_graph.pkl + hierarchy_tree.pkl
-│   ├── microbiome/                    # Taxonomic data (20 graphs)
-│   │   ├── Collections: C0001, C0005, ...
-│   │   └── Patients: P0004, P0005, ...
-│   └── memetracker/                   # Cascades (20 graphs)
-│       └── cascades/: cascade_00154, ...
-└── manifests/                         # Dataset manifests (6 files)
-    ├── manifest_10_wiki_{train,test}.json
-    ├── manifest_10_microbiome_{train,test}.json
-    └── manifest_10_memetracker_{train,test}.json
-```
 
 ## Dependencies
 
